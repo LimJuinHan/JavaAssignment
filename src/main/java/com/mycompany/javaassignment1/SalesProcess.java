@@ -1,5 +1,9 @@
 package com.mycompany.javaassignment1;
 
+import com.mycompany.javaassignment1.gui.DeleteModifySaleOrder;
+import com.mycompany.javaassignment1.gui.LoginMenu;
+import com.mycompany.javaassignment1.gui.SalesReport;
+import com.mycompany.javaassignment1.gui.SelfProfile;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -36,8 +40,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-public class SalesProcess {
-        
+public class SalesProcess extends JFrame {  
+    
     private static DefaultTableModel tableModel;
     private static TableRowSorter<DefaultTableModel> sorter;
     private static void filterAndCopyUnapprovedRows(String inputFile, String outputFile) throws IOException {
@@ -52,22 +56,23 @@ public class SalesProcess {
             }
             
         }
-    }
-    }
     
+    }
+    }
    
-    public static void main(String[] args) {
-       
+   
+    public SalesProcess() {
+        
         // Create and configure the frame
-        JFrame frame = new JFrame("Furniture Sale Ordering Management System");
-        frame.setSize(600, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Create and configure the panel
+        JFrame frame = new JFrame("Officer Menu");
+        frame.setSize(1200, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);      
         JPanel panel = new JPanel(new BorderLayout());
         frame.add(panel);
 
-        // Create search panel
+        // Create search pane
+        
+   
         JPanel searchPanel = new JPanel(new GridLayout(1, 2));
 
         // Add a JTextField for search input
@@ -79,6 +84,8 @@ public class SalesProcess {
         searchPanel.add(searchButton);
 
         panel.add(searchPanel, BorderLayout.NORTH);
+
+        // Create and configure the panel
 
         // Create table model with columns
         tableModel = new DefaultTableModel(
@@ -97,6 +104,7 @@ public class SalesProcess {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         // Create approve panel
+        
         JPanel approvePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         // Create approve button
@@ -131,6 +139,58 @@ public class SalesProcess {
         JPanel invoicePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton showInvoiceButton = new JButton("Show Invoice");
         approvePanel.add(showInvoiceButton);
+        
+        JPanel PersonalInformationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton PIButton = new JButton("Personal Information");
+        approvePanel.add(PIButton);
+        
+        
+
+        JPanel ModifyPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton ModifyButton = new JButton("Modify Sales");
+        approvePanel.add(ModifyButton);
+        
+        ModifyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                DeleteModifySaleOrder DeleteModifySaleOrder1 = new DeleteModifySaleOrder();
+        DeleteModifySaleOrder1.setVisible(true);
+        
+            }
+        });
+        
+
+        
+        JPanel GRPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton GRButton = new JButton("Generate Report");
+        approvePanel.add(GRButton);
+        
+        GRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                SalesReport SalesReport1 = new SalesReport();
+        SalesReport1.setVisible(true);
+        }
+        });
+        
+        JPanel loPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton loButton = new JButton("LOG OUT");
+        approvePanel.add(loButton);
+        
+        loButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                Session session = Session.getInstance();
+                session.clearSession();
+                SalesProcess.this.dispose();
+                LoginMenu loginMenu = new LoginMenu();
+                loginMenu.setVisible(true);
+                }
+        });
+        
         // Create save panel
         JPanel savePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -164,6 +224,26 @@ public class SalesProcess {
                 }
             }
         });
+        
+        PIButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                Session session = Session.getInstance();
+                String userID = session.getUserID();
+                String userName = session.getUsername();
+                String password = session.getPassword();
+                String role = session.getRole();
+                String status = session.getStatus();
+                int age = session.getAge();
+                String email = session.getEmail();
+                String phoneNumber = session.getPhoneNumber();
+
+                Salesperson currentUser = new Salesperson(userID, userName, password, role, status, age, email, phoneNumber);
+                SelfProfile selfProfileWindow = new SelfProfile(currentUser);
+                selfProfileWindow.setVisible(true);  // TODO add your handling code here:
+                    }
+                });
 
         showInvoiceButton.addActionListener(new ActionListener() {
             @Override
@@ -443,6 +523,7 @@ public class SalesProcess {
         invoiceContent.append("Date: ").append(Date).append("\n");
         return invoiceContent.toString();
     }
+    
 }
 
 

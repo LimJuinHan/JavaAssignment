@@ -3,4 +3,7 @@
 13,13,SÖDERHAMN,Sofa,Living Room Furniture,700,1,Work Done,2024-02-22
 5,5,LACK,TV Stand,Living Room Furniture,200,2,In Progress,2024-02-14
 6,6,POÄNG,Armchair,Living Room Furniture,250,1,In Progress,2024-02-15
-11,1,EKTORP,Sofa,Living Room Furniture,500.0,6,In Progress,2024-02-21
+11,1,EKTORP,Sofa,Living Room Furniture,500.0,6,Work Done,2024-02-21
+12,1,EKTORP,Sofa,Living Room Furniture,500.0,4,In Progress,2024-02-24
+13,1,EKTORP,Sofa,Living Room Furniture,500,1,In Progress,2024-02-24
+14,1,EKTORP,Sofa,Living Room Furniture,500,1,Work Done,2024-02-24

@@ -9,6 +9,7 @@ package com.mycompany.javaassignment1.gui;
  * @author godch
  */
 
+import com.mycompany.javaassignment1.SalesProcess;
 import com.mycompany.javaassignment1.User;
 import com.mycompany.javaassignment1.Session;
 import java.io.IOException;
@@ -148,7 +149,7 @@ public class LoginMenu extends javax.swing.JFrame {
 }
 
 // method to open main menu window based on user role
-    private void openMainMenu(String role, String username) {
+    public void openMainMenu(String role, String username) {
         switch (role) {
             case "Administrator":
                 AdministratorMenu adminMenu = new AdministratorMenu();
@@ -156,8 +157,9 @@ public class LoginMenu extends javax.swing.JFrame {
                 adminMenu.setVisible(true);
                 break;
             case "Officer":
-                OfficerMenu officerMenu = new OfficerMenu();
-                officerMenu.setVisible(true);
+                SalesProcess salesProcess = new SalesProcess(); // Correct instantiation
+                salesProcess.setVisible(true);
+     
                 break;
             case "Salesperson":
                 SalespersonMenu salesMenu = new SalespersonMenu();
